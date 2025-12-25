@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
-import { User, Bell, Globe, Shield, HelpCircle } from 'lucide-react';
+import { Bell, Globe, Shield, HelpCircle } from 'lucide-react';
 import DashboardLayout from '@/components/DashboardLayout';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
+import { useScanStore } from '@/store/scanStore';
 
 const Settings = () => {
+  const { language, setLanguage } = useScanStore();
   return (
     <DashboardLayout>
       <div className="p-6 lg:p-8">
@@ -24,31 +26,7 @@ const Settings = () => {
         </motion.div>
 
         <div className="space-y-6">
-          {/* Profile Section */}
-          <motion.div
-            className="glass-card p-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-          >
-            <h2 className="font-orbitron text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
-              <User className="w-5 h-5 text-primary" />
-              Profile
-            </h2>
-            
-            <div className="flex items-center gap-4 p-4 rounded-xl bg-card/50">
-              <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center neon-border">
-                <User className="w-8 h-8 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-foreground">Guest User</h3>
-                <p className="text-sm text-muted-foreground">guest@kisan-agi.com</p>
-              </div>
-              <Button variant="glass" className="ml-auto">
-                Edit Profile
-              </Button>
-            </div>
-          </motion.div>
+
 
           {/* Notifications */}
           <motion.div
@@ -61,7 +39,7 @@ const Settings = () => {
               <Bell className="w-5 h-5 text-primary" />
               Notifications
             </h2>
-            
+
             <div className="space-y-4">
               {[
                 { label: 'Push Notifications', desc: 'Receive alerts for scan results' },
@@ -90,19 +68,20 @@ const Settings = () => {
               <Globe className="w-5 h-5 text-primary" />
               Language
             </h2>
-            
+
             <div className="grid grid-cols-3 gap-3">
               {[
-                { code: 'ENG', label: 'English', active: true },
-                { code: 'HIN', label: 'हिंदी', active: false },
-                { code: 'MAR', label: 'मराठी', active: false },
+                { code: 'ENG', label: 'English' },
+                { code: 'HIN', label: 'हिंदी' },
+                { code: 'MAR', label: 'मराठी' },
               ].map((lang) => (
                 <button
                   key={lang.code}
+                  onClick={() => setLanguage(lang.code as any)}
                   className={`
                     p-4 rounded-xl text-center transition-all
-                    ${lang.active 
-                      ? 'bg-primary/20 border border-primary/50 text-primary' 
+                    ${language === lang.code
+                      ? 'bg-primary/20 border border-primary/50 text-primary'
                       : 'bg-card/50 border border-border hover:border-primary/30 text-muted-foreground hover:text-foreground'
                     }
                   `}
@@ -125,7 +104,7 @@ const Settings = () => {
               <HelpCircle className="w-5 h-5 text-primary" />
               Help & Support
             </h2>
-            
+
             <div className="grid sm:grid-cols-2 gap-3">
               <Button variant="glass" className="justify-start h-auto p-4">
                 <div className="text-left">

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useScanStore } from '@/store/scanStore';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { User, ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -25,7 +25,7 @@ const Navbar = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <motion.nav 
+    <motion.nav
       className="fixed top-0 left-0 right-0 z-50 glass-card border-b border-border/50"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -59,8 +59,8 @@ const Navbar = () => {
             {/* Language Selector */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="ghost" 
+                <Button
+                  variant="ghost"
                   className="hidden sm:flex items-center gap-1 text-muted-foreground hover:text-foreground hover:bg-secondary/50"
                 >
                   <span className="font-mono text-sm">{language}</span>
@@ -81,14 +81,7 @@ const Navbar = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Profile Icon */}
-            <Button 
-              variant="ghost" 
-              size="icon"
-              className="hidden sm:flex hover:bg-secondary/50 hover:text-primary"
-            >
-              <User className="w-5 h-5" />
-            </Button>
+
 
             {/* Mobile Menu Toggle */}
             <Button
@@ -125,9 +118,8 @@ const Navbar = () => {
 const NavLink = ({ to, active, children }: { to: string; active: boolean; children: React.ReactNode }) => (
   <Link to={to}>
     <motion.span
-      className={`relative text-sm font-medium transition-colors ${
-        active ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
-      }`}
+      className={`relative text-sm font-medium transition-colors ${active ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+        }`}
       whileHover={{ scale: 1.05 }}
     >
       {children}
@@ -142,8 +134,8 @@ const NavLink = ({ to, active, children }: { to: string; active: boolean; childr
 );
 
 const MobileNavLink = ({ to, onClick, children }: { to: string; onClick: () => void; children: React.ReactNode }) => (
-  <Link 
-    to={to} 
+  <Link
+    to={to}
     onClick={onClick}
     className="px-4 py-2 text-muted-foreground hover:text-primary hover:bg-secondary/50 rounded-lg transition-colors"
   >

@@ -92,7 +92,7 @@ const FileUploadBtn = ({ onFileSelect }: FileUploadProps) => {
           setCurrentScan(scanResult);
           addToHistory(scanResult);
           setIsScanning(false);
-          navigate('/results');
+          navigate('/dashboard/results');
 
         } catch (error) {
           console.error("❌ Scan failed:", error);
